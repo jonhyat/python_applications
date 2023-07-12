@@ -11,12 +11,12 @@ Using AI is not allowed.
 import random
 import time
 from enum import Enum
-from logging import Logger
+from logging import getLogger # The method ```getLogger(__name__)``` is batter because its looking for any existing logger configurations for the given name while the  ```Logger(__name__)``` is creating a default logger with the name and sets the default log level to 0.
 
-import requests
+import requests 
 from prefect import Task, flow
 from prefect.server.schemas.states import StateType
-from requests import RequestException
+from requests import RequestException 
 
 from schemas import HodlHodlOfferBase, HodlHodlUserBase, settings
 
@@ -34,7 +34,7 @@ class Scraper_Names(Enum):
 class Scraper:
     def __init__(self, **kwargs):
         self.proxy = kwargs.get("proxy", None)
-        self.logger = Logger(__name__)
+        self.logger = getLogger(__name__) # reflect the change as in the imports
         self.requester = requests
         self.total_offer_percent_to_scrape = kwargs.get("total_offer_percent_to_scrape", 100)
 
